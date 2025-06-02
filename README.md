@@ -7,10 +7,6 @@ This project is a solution for an assignment from NxtWave, built using React, Ja
 - [Project Overview](#project-overview)
 - [Features](#features)
 - [Getting Started](#getting-started)
-- [Available Scripts](#available-scripts)
-- [Folder Structure](#folder-structure)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Project Overview
 
