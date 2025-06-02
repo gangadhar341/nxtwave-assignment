@@ -1,4 +1,4 @@
-import React from "react";
+import "../styles/failedView.css";
 
 export default function FailedView({ error }) {
   const tryAgain = () => {
@@ -8,7 +8,9 @@ export default function FailedView({ error }) {
     <div className='failedView-container'>
       <img src='./failed.png' alt='failed' />
       <h2 className='err-msg'>{error}</h2>
-      <button onClick={tryAgain}>Try Again</button>
+      <button className='failedView-button' onClick={tryAgain}>
+        Try Again
+      </button>
     </div>
   );
 }

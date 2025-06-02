@@ -3,6 +3,7 @@ import "./App.css";
 import ListView from "./components/ListView";
 import FailedView from "./components/FailedView";
 import NewList from "./components/NewList";
+import ToastComponent from "./components/ToastComponent";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -16,7 +17,7 @@ function App() {
   const [newList, setNewList] = useState([]);
   const [list1Backup, setList1Backup] = useState([]);
   const [list2Backup, setList2Backup] = useState([]);
-  const [newLists, setNewLists] = useState([]); // Add this line
+  const [newLists, setNewLists] = useState([]);
 
   useEffect(() => {
     const fetchLists = async () => {
@@ -70,14 +71,18 @@ function App() {
   return (
     <div className='App'>
       {toastMessage && (
-        <div className='toast'>
-          <p>{toastMessage}</p>
-        </div>
+        <ToastComponent
+          toastMessage={toastMessage}
+          setToastMessage={setToastMessage}
+        />
       )}
-
       <div className='container'>
         <h1>List Creation</h1>
-        <button className='createNew-list-button' onClick={handleCreateList}>
+        <button
+          className='createNew-list-button'
+          onClick={handleCreateList}
+          disabled={showNewList}
+        >
           Create a new List
         </button>
       </div>
@@ -87,8 +92,7 @@ function App() {
             <ListView
               key={idx}
               list={list}
-              setList1={idx === 0 ? setList1 : undefined}
-              setList2={idx === 1 ? setList2 : undefined}
+              setList={idx === 0 ? setList1 : idx === 1 ? setList2 : undefined}
               isChecked={
                 idx === 0 ? list1Checked : idx === 1 ? list2Checked : false
               }
@@ -109,7 +113,7 @@ function App() {
           <>
             <ListView
               list={list1}
-              setList1={setList1}
+              setList={setList1}
               isChecked={list1Checked}
               setIsChecked={setList1Checked}
               title='List 1'
@@ -130,7 +134,7 @@ function App() {
             />
             <ListView
               list={list2}
-              setList2={setList2}
+              setList={setList2}
               isChecked={list2Checked}
               setIsChecked={setList2Checked}
               title='List 2'

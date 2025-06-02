@@ -1,0 +1,28 @@
+li {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  border-radius: 15px;
+  min-height: 100px;
+  width: 300px;
+  border: 1px solid #ccc;
+}
+li h2 {
+  margin-bottom: 4px;
+}
+
+li p {
+  margin-top: 0;
+}
+.arrow-buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 8px;
+  margin-bottom: 10px;
+}

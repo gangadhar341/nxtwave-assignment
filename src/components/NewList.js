@@ -1,5 +1,6 @@
-import React from "react";
-import "../App.css";
+import ListItem from "./ListItem";
+import "../styles/newList.css";
+
 export default function NewList({
   list = [],
   setList1,
@@ -12,19 +13,15 @@ export default function NewList({
   setNewLists,
   title,
 }) {
-  const leftArrowClicked = (newItem) => {
+  const handleArrowClick = (direction, newItem) => {
     if (!showNewList) return;
     const updatedList = list.filter((item) => item.id !== newItem.id);
     setNewList(updatedList);
-    setList1((prev) => [newItem, ...prev]);
-    return;
-  };
-  const rightArrowClicked = (newItem) => {
-    if (!showNewList) return;
-    const updatedList = list.filter((item) => item.id !== newItem.id);
-    setNewList(updatedList);
-    setList2((prev) => [newItem, ...prev]);
-    return;
+    if (direction === "left") {
+      setList1((prev) => [newItem, ...prev]);
+    } else if (direction === "right") {
+      setList2((prev) => [newItem, ...prev]);
+    }
   };
 
   const handleUpdate = () => {
@@ -45,24 +42,14 @@ export default function NewList({
       <label className='header-container'>{`${title} (${list.length})`}</label>
       <ul>
         {list.map((item) => (
-          <li key={item.id}>
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-            <div className='new-list-buttons'>
-              <button
-                className='material-symbols-outlined'
-                onClick={() => leftArrowClicked(item)}
-              >
-                west
-              </button>
-              <button
-                className='material-symbols-outlined'
-                onClick={() => rightArrowClicked(item)}
-              >
-                east
-              </button>
-            </div>
-          </li>
+          <ListItem
+            key={item.id}
+            item={item}
+            title={title}
+            showNewList={showNewList}
+            onArrowClick={handleArrowClick}
+            isNewList={true}
+          />
         ))}
       </ul>
       {showNewList && (
@@ -70,7 +57,11 @@ export default function NewList({
           <button className='cancel-button' onClick={handleCancel}>
             Cancel
           </button>
-          <button className='update-button' onClick={handleUpdate}>
+          <button
+            className='update-button'
+            onClick={handleUpdate}
+            disabled={list.length === 0}
+          >
             Update
           </button>
         </div>

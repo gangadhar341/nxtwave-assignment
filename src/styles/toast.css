@@ -1,0 +1,123 @@
+.toast-container {
+  margin-right: 10px;
+  position: fixed;
+  top: 20px;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid red;
+  border-radius: 5px;
+  min-width: 400px;
+  max-width: 400px;
+  opacity: 0;
+  transform: translateX(100%);
+  animation: slideIn 0.5s ease-out forwards;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.cross-icon {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 3px;
+  right: 10px;
+}
+.cross-icon button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+.toast-container p {
+  padding: 10px 20px;
+  padding-left: 30px;
+  width: 100%;
+  text-align: left;
+}
+.toast-progress-bar-container {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background-color: #ccc;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.toast-progress-bar {
+  width: 0;
+  height: 100%;
+  background-color: #dd1717;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  animation: toastProgress 5s linear forwards;
+  position: absolute;
+  right: 0;
+  left: auto;
+  transform-origin: right;
+}
+
+@keyframes toastProgress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1200px) {
+  .toast-container {
+    min-width: 340px;
+    max-width: 340px;
+    right: 0;
+    top: 16px;
+  }
+}
+
+@media (max-width: 992px) {
+  .toast-container {
+    min-width: 260px;
+    max-width: 90vw;
+    right: 0;
+    top: 12px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .toast-container {
+    min-width: 90vw;
+    max-width: 95vw;
+    left: 2vw;
+    right: 2vw;
+    top: 8px;
+    font-size: 14px;
+    padding: 0 4px;
+  }
+  .toast-container p {
+    padding: 8px 8px 8px 24px;
+    font-size: 14px;
+  }
+  .toast-progress-bar-container {
+    height: 4px;
+  }
+  .cross-icon button {
+    font-size: 20px;
+  }
+}

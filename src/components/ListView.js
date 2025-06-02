@@ -1,9 +1,8 @@
-import React from "react";
+import ListItem from "./ListItem";
 
 export default function ListView({
   list = [],
-  setList1,
-  setList2,
+  setList,
   isChecked,
   setIsChecked,
   title,
@@ -14,19 +13,11 @@ export default function ListView({
     setIsChecked(event.target.checked);
   };
 
-  const rightArrowClicked = (newItem) => {
+  const handleArrowClick = (direction, item) => {
     if (!showNewList) return;
-    const updatedList = list.filter((item) => item.id !== newItem.id);
-    setList1(updatedList);
-    setNewList((prev) => [...prev, newItem]);
-    return;
-  };
-  const leftArrowClicked = (newItem) => {
-    if (!showNewList) return;
-    const updatedList = list.filter((item) => item.id !== newItem.id);
-    setList2(updatedList);
-    setNewList((prev) => [...prev, newItem]);
-    return;
+    const updatedList = list.filter((i) => i.id !== item.id);
+    setList && setList(updatedList);
+    setNewList((prev) => [...prev, item]);
   };
 
   return (
@@ -47,30 +38,13 @@ export default function ListView({
       </div>
       <ul>
         {list.map((item) => (
-          <li key={item.id}>
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-            {showNewList && (
-              <div className='arrow-buttons'>
-                {title === "List 1" && (
-                  <button
-                    className='material-symbols-outlined'
-                    onClick={() => rightArrowClicked(item)}
-                  >
-                    east
-                  </button>
-                )}
-                {title === "List 2" && (
-                  <button
-                    className='material-symbols-outlined'
-                    onClick={() => leftArrowClicked(item)}
-                  >
-                    west
-                  </button>
-                )}
-              </div>
-            )}
-          </li>
+          <ListItem
+            key={item.id}
+            item={item}
+            title={title}
+            showNewList={showNewList}
+            onArrowClick={handleArrowClick}
+          />
         ))}
       </ul>
     </div>
