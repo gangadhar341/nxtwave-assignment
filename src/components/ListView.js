@@ -40,20 +40,36 @@ export default function ListView({
             id={title}
           />
         )}
-        <label htmlFor={title}>{title}</label>
-        {showNewList && <span>({list.length})</span>}
+        <label htmlFor={title}>
+          {title}
+          {showNewList && ` (${list.length})`}
+        </label>
       </div>
       <ul>
         {list.map((item) => (
           <li key={item.id}>
             <h2>{item.name}</h2>
-            {showNewList && title === "List 1" && (
-              <button onClick={() => rightArrowClicked(item)}>{">"}</button>
-            )}
-            {showNewList && title === "List 2" && (
-              <button onClick={() => leftArrowClicked(item)}>{"<"}</button>
-            )}
             <p>{item.description}</p>
+            {showNewList && (
+              <div className='arrow-buttons'>
+                {title === "List 1" && (
+                  <button
+                    className='material-symbols-outlined'
+                    onClick={() => rightArrowClicked(item)}
+                  >
+                    east
+                  </button>
+                )}
+                {title === "List 2" && (
+                  <button
+                    className='material-symbols-outlined'
+                    onClick={() => leftArrowClicked(item)}
+                  >
+                    west
+                  </button>
+                )}
+              </div>
+            )}
           </li>
         ))}
       </ul>

@@ -77,7 +77,9 @@ function App() {
 
       <div className='container'>
         <h1>List Creation</h1>
-        <button onClick={handleCreateList}>Create a new List</button>
+        <button className='createNew-list-button' onClick={handleCreateList}>
+          Create a new List
+        </button>
       </div>
       <div className='lists-container'>
         {!showNewList &&
@@ -124,6 +126,7 @@ function App() {
               list1Backup={list1Backup}
               list2Backup={list2Backup}
               setNewLists={setNewLists}
+              title={`List ${allLists.length + 1}`}
             />
             <ListView
               list={list2}

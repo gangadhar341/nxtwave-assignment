@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../App.css";
 export default function NewList({
   list = [],
   setList1,
@@ -10,6 +10,7 @@ export default function NewList({
   list1Backup,
   list2Backup,
   setNewLists,
+  title,
 }) {
   const leftArrowClicked = (newItem) => {
     if (!showNewList) return;
@@ -41,24 +42,39 @@ export default function NewList({
   };
   return (
     <div className='list-view'>
-      {showNewList && (
-        <div className='buttons-container'>
-          <button onClick={handleUpdate}>Update</button>
-          <button onClick={handleCancel}>Cancel</button>
-        </div>
-      )}
+      <label className='header-container'>{`${title} (${list.length})`}</label>
       <ul>
         {list.map((item) => (
           <li key={item.id}>
             <h2>{item.name}</h2>
-            <div>
-              <button onClick={() => leftArrowClicked(item)}>{"<"}</button>
-              <button onClick={() => rightArrowClicked(item)}>{">"}</button>
-            </div>
             <p>{item.description}</p>
+            <div className='new-list-buttons'>
+              <button
+                className='material-symbols-outlined'
+                onClick={() => leftArrowClicked(item)}
+              >
+                west
+              </button>
+              <button
+                className='material-symbols-outlined'
+                onClick={() => rightArrowClicked(item)}
+              >
+                east
+              </button>
+            </div>
           </li>
         ))}
       </ul>
+      {showNewList && (
+        <div className='buttons-container fixed-bottom'>
+          <button className='cancel-button' onClick={handleCancel}>
+            Cancel
+          </button>
+          <button className='update-button' onClick={handleUpdate}>
+            Update
+          </button>
+        </div>
+      )}
     </div>
   );
 }
